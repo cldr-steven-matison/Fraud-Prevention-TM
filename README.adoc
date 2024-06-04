@@ -23,8 +23,6 @@ All the value of CDP and CDF can be delivered either OnPremise or on Public Clou
 
 The architecture uses:
 
-* *link:https://docs.cloudera.com/cfm/2.1.2/index.html[Cloudera Flow Management -Apache Nifi]* - for data ingestion. Apache Nifi collects in real-time transactional events and sends them to Apache Kafka brokers.
-
 * *link:https://docs.cloudera.com/cdp-private-cloud-base/7.1.7/concepts-streaming.html[Cloudera Streams Messaging -Apache Kafka]* - for stream messaging. Apache Kafka will receive the transactional events from Apache Nifi and store them.
 
 * *link:https://docs.cloudera.com/csa/1.6.0/index.html[Cloudera Streaming analytics -Apache Flink/SSB]* - for data processing.Cloudera offers Cloudera Stream Analytics(CSA) which is essentially *Apache Flink + SQL Stream Builder (SSB)*. Apache Flink offers low-latency processing of unbounded data streams. It connects to different data sources such as Kafka topics providing real-time insights or detecting anomalies in streaming context. Streaming SQL Builder (SSB) provides a SQL layer that allows data analysts to rapidly experiment with streaming data without writing java code. SSB supports different data connectors: Apache Kafka, apache Kudu, apache Hive,Schema Registry.
