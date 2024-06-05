@@ -154,6 +154,8 @@ STORED AS TEXTFILE;
 LOAD DATA INPATH 's3a://kdj-demo/my-data/customer-data.csv' INTO TABLE default.customer_temp
 ----
 
+** Note **  It is possible to upload this file in Hue using File Upload and Import feature.
+
 Then, I'll create my Kudu table "customer" from the previous customer_temp table:
 
 [source,sql]
@@ -219,24 +221,13 @@ Well, all our data models are set. Let's see how to build the pipeline of our ev
 
 ## Data Ingestion
 
-First part of our data pipeline is the data ingestion. We will use Nifi to capture the streamed data over UDP and push events to Kafka with a simple flow.
-
-
-=== Step 1: Registering the schema in Schema Registry
-
-image:Images/03_Schema_Name_With_Schema_Registry.png[]
-
-
-
-=== Step 2: Pushing transaction data to Apache Kafka
-
-
-Instructions for ingesting raw data files into Kafka
+First part of our data pipeline is the data ingestion. This is normally done with a NiFi DataFlow but we will skip this for TM.   
+Produce transaction data from another system into two kafka topics:  txn1 and txn2 to be used in SSB.
 
 
 ## Data Processing
 
-Well, we are getting our financial transactions in our apache Kafka brokers. So far so good. Now, let's move forward and see how we can implement the fraud detection logic with Flink and SQL Stream Builder (SSB).
+Now we are getting our financial transactions in our apache Kafka Topics. Now, let's move forward and see how we can implement the fraud detection logic with Flink and SQL Stream Builder (SSB).
 
 As I mentioned before, Cloudera CSA is intended "to empower real-time insights", and it includes Flink and SSB.
 
@@ -452,4 +443,10 @@ Thanks for reading this far. As always, feedback and suggestions are welcome.
 ## References
 [1]: https://www.cloudera.com/solutions/financial-services/fraud-prevention-resource-kit.html
 
-[2]: https://docs.cloudera.com/csa/1.6.1/ssb-creating-tables/topics/csa-ssb-using-tables.html
+[2]: CSA 1.12.0 Docs: https://docs.cloudera.com/csa/1.12.0/index.html
+
+[3]: https://blog.cloudera.com/fraud-detection-with-cloudera-stream-processing-part-1/
+
+[4]: https://blog.cloudera.com/fraud-detection-with-cloudera-stream-processing-part-2-real-time-streaming-analytics/
+
+
